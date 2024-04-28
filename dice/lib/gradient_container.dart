@@ -24,7 +24,7 @@ class GradientContainer extends StatelessWidget {
         begin: startAlignment,
         end: endAlignment,
       )),
-      child: Center(
+      child: const Center(
           // Image위젯은 동적 위젯
           child: DiceRoller()
       ),

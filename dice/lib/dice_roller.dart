@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+// Random객채의 경우 재사용을 위한 전역에 생성
+final randomIaer = Random();
 class DiceRoller extends StatefulWidget {
   const DiceRoller({super.key});
 
@@ -18,10 +20,8 @@ class _DiceRollerState extends State<DiceRoller> {
 
   void rollDice() {
     setState(() {
-      currentDiceRoll = Random().nextInt(6) + 1;
+      currentDiceRoll = randomIaer.nextInt(6) + 1;
     });
-
-    print('test');
   }
 
   @override
