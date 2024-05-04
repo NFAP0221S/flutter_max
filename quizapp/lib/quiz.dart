@@ -31,6 +31,16 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(context) {
+    // 절대적으로 바뀌지 않을 때, final
+    // final screenWidget = activeScreen == 'start-screen'
+    //           ? StartScreen(switchScreen)
+    //           : const QuestionScreen();
+    Widget screenWidget = StartScreen(switchScreen);
+    if (activeScreen == 'questions-screen') {
+      print('나 실행됨 ㅋ');
+      screenWidget = const QuestionScreen();
+    }
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -45,9 +55,10 @@ class _QuizState extends State<Quiz> {
             ),
           ),
           // child: activeScreen,
-          child: activeScreen == 'start-screen'
-              ? StartScreen(switchScreen)
-              : const QuestionScreen(),
+          // child: activeScreen == 'start-screen'
+          //     ? StartScreen(switchScreen)
+          //     : const QuestionScreen(),
+          child: screenWidget,
         ),
       ),
     );
