@@ -18,35 +18,43 @@ class _QuestionScreen extends State<QuestionScreen> {
 
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            // 'The question...',
-            currentQuestion.text,
-            style: const TextStyle(color: Colors.white),
-          ),
-          const SizedBox(height: 30),
-          AnswerButton(
-            answerText: currentQuestion.answers[0],
-            onTap: () {},
-          ),
-          const SizedBox(height: 10),
-          AnswerButton(
-            answerText: currentQuestion.answers[1],
-            onTap: () {},
-          ),
-          const SizedBox(height: 10),
-          AnswerButton(
-            answerText: currentQuestion.answers[2],
-            onTap: () {},
-          ),
-          const SizedBox(height: 10),
-          AnswerButton(
-            answerText: currentQuestion.answers[3],
-            onTap: () {},
-          ),
-        ],
+      child: Container(
+        margin: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              // 'The question...',
+              currentQuestion.text,
+              style: const TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            // // 기본적인 map사용법
+            // ...currentQuestion.answers.map(
+            //   (answer) {
+            //     return AnswerButton(
+            //       answerText: answer,
+            //       onTap: () {},
+            //     );
+            //   },
+            // )
+            // 나는 강의에 없는 SizedBox를 추가해야하기 때문에
+            // index를 반환하는 map이 필요함.
+            ...currentQuestion.answers.asMap().entries.expand((entry) {
+              int idx = entry.key;
+              String answer = entry.value;
+              return [
+                AnswerButton(
+                  answerText: answer,
+                  onTap: () {},
+                ),
+                if (idx != currentQuestion.answers.length - 1) const SizedBox(height: 10)
+              ];
+            }),
+          ],
+        ),
       ),
     );
   }
