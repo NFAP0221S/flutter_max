@@ -42,7 +42,7 @@ class _QuestionScreen extends State<QuestionScreen> {
             // )
             // 나는 강의에 없는 SizedBox를 추가해야하기 때문에
             // index를 반환하는 map이 필요함.
-            ...currentQuestion.answers.asMap().entries.expand((entry) {
+            ...currentQuestion.getShuffledAnsswers().asMap().entries.expand((entry) {
               int idx = entry.key;
               String answer = entry.value;
               return [

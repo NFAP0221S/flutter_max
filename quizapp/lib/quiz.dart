@@ -37,7 +37,6 @@ class _QuizState extends State<Quiz> {
     //           : const QuestionScreen();
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == 'questions-screen') {
-      print('나 실행됨 ㅋ');
       screenWidget = const QuestionScreen();
     }
 
