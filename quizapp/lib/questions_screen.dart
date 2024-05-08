@@ -12,9 +12,19 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreen extends State<QuestionScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    // currentQuestionIndex += 1;
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
+
   @override
   Widget build(context) {
-    final currentQuestion = questions[0];
+    // final currentQuestion = questions[0];
+    final currentQuestion = questions[currentQuestionIndex];
 
     return SizedBox(
       width: double.infinity,
@@ -42,15 +52,20 @@ class _QuestionScreen extends State<QuestionScreen> {
             // )
             // 나는 강의에 없는 SizedBox를 추가해야하기 때문에
             // index를 반환하는 map이 필요함.
-            ...currentQuestion.getShuffledAnsswers().asMap().entries.expand((entry) {
+            ...currentQuestion
+                .getShuffledAnsswers()
+                .asMap()
+                .entries
+                .expand((entry) {
               int idx = entry.key;
               String answer = entry.value;
               return [
                 AnswerButton(
                   answerText: answer,
-                  onTap: () {},
+                  onTap: answerQuestion,
                 ),
-                if (idx != currentQuestion.answers.length - 1) const SizedBox(height: 10)
+                if (idx != currentQuestion.answers.length - 1)
+                  const SizedBox(height: 10)
               ];
             }),
           ],
