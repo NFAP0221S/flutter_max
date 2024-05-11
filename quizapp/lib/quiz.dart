@@ -12,6 +12,8 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  final List<String> selectedAnswer = [];
+
   // 타입을 Widget으로 두면, 모든 위젯 타입 할당가능
   // Widget? activeScreen;
   var activeScreen = 'start-screen';
@@ -29,6 +31,10 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswer.add(answer);
+  }
+
   @override
   Widget build(context) {
     // 절대적으로 바뀌지 않을 때, final
@@ -37,7 +43,9 @@ class _QuizState extends State<Quiz> {
     //           : const QuestionScreen();
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionScreen();
+      screenWidget = QuestionScreen(
+        onSelectAnswer: chooseAnswer,
+      );
     }
 
     return MaterialApp(
