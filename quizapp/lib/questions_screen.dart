@@ -20,7 +20,8 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreen extends State<QuestionScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
     // currentQuestionIndex += 1;
     setState(() {
       currentQuestionIndex++;
@@ -73,7 +74,10 @@ class _QuestionScreen extends State<QuestionScreen> {
               return [
                 AnswerButton(
                   answerText: answer,
-                  onTap: answerQuestion,
+                  onTap: () => answerQuestion(answer)
+                  // onTap: () {
+                  //   answerQuestion(answer);
+                  // },
                 ),
                 if (idx != currentQuestion.answers.length - 1)
                   const SizedBox(height: 10)
